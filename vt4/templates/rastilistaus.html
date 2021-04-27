@@ -1,0 +1,49 @@
+{% extends "withFooter.html" %}
+{% block title %}Rastilistaus{% endblock %}
+
+{% block taulukko %}
+<h1>Kisan {{session['adminKilpailu']['nimi']}} rastilistaus.</h1>
+
+<table>
+ <tr><th>Lon</th><th>Lat</th><th>Koodi</th><th>Leimauskerrat</th></tr>
+{% for x in range(session['rastit']|length) %}
+<tr>
+<td>{{session['rastit'][x]['lon']}}</td>
+<td>{{session['rastit'][x]['lat']}}</td>
+<td>{{session['rastit'][x]['koodi']}}</td>
+<td>{{session['rastit'][x]['lkm']}}</td>
+<td><a href="{{session['rastit'][x]['query']}}">Muokkaa</a></td>
+</tr>
+{% endfor %}
+</table>
+{% endblock taulukko %}
+
+{% block formi %}
+{% if session['rastiNow'] != None %}
+<p id="rastiP" >Muokataan olemassa olevaa rastia!</p>
+{% endif %}
+<form action="{{request.base_url}}" accept-charset="UTF-8" method="POST">
+ <div id="rastinLisays">
+ <p id="lanLabel">
+ <label>Lat<input type="text" name="lanLabel" value="{{tempLat}}" /></label>
+ <label class="error">{{lanLabelError}}</label>
+ </p>
+ <p id="lonLabel">
+ <label>Lon<input type="text" name="lonLabel" value="{{tempLon}}"/></label>
+ <label class="error">{{lonLabelError}}</label>
+ </p>
+ <p id="koodiLabel">
+ <label>Koodi<input type="text" name="koodiLabel" value="{{tempKoodi}}"/></label>
+ <label class="error">{{koodiLabelError}}</label>
+ </p>
+ <p id="poistaRasti">
+ <label>Poista<input type="checkbox" name="poistaRasti"/></label>
+ <label class="error">{{poistaError}}</label>
+ </p>
+ </div>
+ <p>
+ <input type="submit" name="laheta" value="Tallenna" />
+ </p>
+</form> 
+
+{% endblock formi %}

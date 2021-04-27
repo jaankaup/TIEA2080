@@ -1,0 +1,13 @@
+{% extends "withFooter.html" %}
+{% block title %}Main page{% endblock %}
+{% block content %}
+
+<h1>Pääsivu</h1>
+
+<ul>
+{% for x in range(kilpailut|length) %}
+<li><a href="{{kilpailut[x]['url']}}">{{kilpailut[x]['nimi']}}</a></li>
+{% endfor %}
+</ul>
+
+{% endblock %}

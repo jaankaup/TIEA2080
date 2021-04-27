@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<div id="content" xmlns="http://www.w3.org/1999/xhtml">
+<h1>Muokkaa tupaa</h1>
+<div id="formi">
+<form id="tupaForm" action="{{request.base_url}}" accept-charset="UTF-8" method="POST">
+  <div id="tupaMuokkaus">
+    <div>
+      <p id="tupaAikaLabel">
+      <label>Aika<input type="text" name="aika"
+                                    value="{{aika}}"/></label>
+      </p>
+      <p>
+      <label class="error"> {{ errorAika }} </label>
+      </p>
+    </div>
+    <div>
+      <p>Koodi
+      <select name="sKoodi">
+        {% for x in range(rastit|length) %}
+        {% if rastit[x]['koodi'] == koodi %}
+        <option selected="joopajoo" value="{{rastit[x]['koodi']}}">{{rastit[x]['koodi']}}</option>
+        {% endif %}
+        <option value="{{rastit[x]['koodi']}}">{{rastit[x]['koodi']}}</option>
+        {% endfor %}
+      </select>
+      </p>
+      <p></p>
+    </div>
+    <div>
+      <p><label>Joukkue<input type="text" name="jNimi" readonly="nojoo" value="{{jNimi}}"/></label></p>
+      <p></p>
+    </div>
+    <div>
+      <p id="poistaTupaCheckbox">
+      {% if session['muokkaaTupaPoista'] is none %}
+      <label>Poista<input type="checkbox" name="poistaTupa"/></label>
+      {% else %}
+      <label>Poista<input type="checkbox" checked="checked" name="poistaTupa"/></label>
+      {% endif %}
+      </p>
+      <p>
+      <label class="error"> {{ errorPoista }} </label>
+      </p>
+    </div>
+  </div>
+  <p>
+  <input type="submit" name="laheta" value="Tallenna" id="tallennaTupa" />
+  <input type="hidden" name="alkuperainenJoukkue"
+      value="{{alkuperainenJoukkue}}"/>
+  </p>
+</form>
+</div>
+</div>

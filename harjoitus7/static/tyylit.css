@@ -1,0 +1,85 @@
+/* Kaikille medioille yhteiset tyylimaaritykset. */
+@media all {
+  body {
+      background-color: silver;
+      color: black;
+  }
+
+  #nimi_label input {
+    width: 50%;
+    margin-left: 1em;
+  }
+
+  #linkki_label input {
+    width: 50%;
+  }
+  
+  .namiska {
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+    text-decoration: none;
+    color: initial;
+    width: 50px;
+    height: 50px;
+  }
+  
+  .uutis_palkki {
+    margin: 1.0em;
+    padding: 0.5em;
+    background-color: #12ffee;
+    border: medium solid black;
+  }
+  
+  .uutis_ul {
+    list-style: none;
+  }
+  
+  table {
+    border: 1px #eae4d1 solid;
+    box-shadow: 2px 3px 3px black;
+    padding: 0.3em;
+    border-spacing: 0.3em;
+    width: 35%;
+    background-color: white;
+  }
+  
+  table tr {
+    margin: 0.3em;
+  }
+  
+  table tr th {
+    background-color: #ffc653;
+    border: 1px #999999 solid;
+  }
+  
+  table tr td {
+    border: 1px #999999 solid;
+  }
+  
+  .suosikki {
+    background-color: red;
+    color: black;
+  }
+  
+  .ei_suosikki {
+    background-color: grey;
+    color: white;
+  }
+} /* Media all end */
+
+ 	
+@media all and (max-width:600px) {
+  #nimi_label input {
+    width: 80%;
+    margin-left: 0em;
+  }
+
+  #linkki_label input {
+    width: 80%;
+  }
+  .uutis_ul {
+    padding-left: 0em;
+    font-size: 0.8em;
+  }
+}

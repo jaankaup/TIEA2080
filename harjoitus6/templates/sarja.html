@@ -1,0 +1,47 @@
+<html>
+  <head>
+    <title>Sarja</title>
+   <link rel="stylesheet" type="text/css" href="/static/tyylit.css">
+<style>
+label { display: block; }
+</style>
+  </head>
+  <body>
+    <p><a href="/login">logout</a></p>
+    <h1>Sarja</h1>
+
+{% macro with_errors(field) %}
+    {% if field.errors %}
+        {% for error in field.errors %}
+            <span>{{ error|e }}</span>
+        {% endfor %}
+    {% endif %}
+{% endmacro %}
+
+<p><a href="/kilpailut/{{kilpailuId}}">Takaisin kilpailuun</a></p>
+<form action="{{sarja_id}}" accept-charset="UTF-8" method="POST">
+  {{ form.csrf_token }}
+{{form.key}}
+<label>Nimi {{form.nimi}} {{with_errors(form.nimi)}}</label>
+<label>kesto {{form.kesto}} {{with_errors(form.kesto)}}</label>
+{% if sarja_id != "0" %}
+<label>Poista sarja <input type="checkbox" name="poista" value="poista" /></label>
+{% endif %}
+<p><input type="submit" name="lomake" value="Tallenna sarja" /></p>
+</form>
+<h2>Joukkueet</h2>
+{% if sarja_id != "0" %}
+<p><a href="/kilpailut/{{kilpailuId}}/sarja/{{sarja_id}}/joukkue/0">Lisää uusi joukkue</a></p>
+{% endif %}
+  <ul>
+  {% for j in range(joukkueet|length) %}
+  <li><a href="{{sarja_id}}/joukkue/{{joukkueet[j].key.urlsafe()}}">{{joukkueet[j].nimi}}</a></li>
+    <ul>
+    {% for k in range(joukkueet[j].jasenet|length) %}
+    <li>{{joukkueet[j].jasenet[k]}}</li>
+    {%endfor%}
+    </ul>
+  {%endfor%}
+  </ul>
+</body>
+</html>

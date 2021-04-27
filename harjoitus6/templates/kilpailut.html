@@ -1,0 +1,63 @@
+<html>
+  <head>
+    <title>Kilpailu {{form.nimi}}</title>
+   <link rel="stylesheet" type="text/css" href="/static/tyylit.css">
+<style>
+label { display: block; }
+</style>
+  </head>
+  <body>
+    <p><a href="/login">logout</a></p>
+    <h1>Kilpailu {{form.nimi.value}}</h1>
+
+{% macro with_errors(field) %}
+    {% if field.errors %}
+        {% for error in field.errors %}
+            <span>{{ error|e }}</span>
+        {% endfor %}
+    {% endif %}
+{% endmacro %}
+
+<p><a href="/kilpailut">takaisin pääsivulle</a></p>
+<form action="{{kilpailuId}}" accept-charset="UTF-8" method="POST">
+  {{ form.csrf_token }}
+{{form.key}}
+<label>Nimi {{form.nimi}} {{with_errors(form.nimi)}}</label>
+<label>Alkuaika {{form.alkuaika}} {{with_errors(form.alkuaika)}}</label>
+<label>Loppuaika {{form.loppuaika}} {{with_errors(form.loppuaika)}}</label>
+<label>kesto {{form.kesto}} {{with_errors(form.kesto)}}</label>
+{% if kilpailuId != "0" %}
+<label>Poista kilpailu <input type="checkbox" name="poista" value="poista" /></label>
+{% endif %}
+<p><input type="submit" name="lomake" value="Tallenna kilpailu" /></p>
+</form>
+<h2>Sarjat</h2>
+{% if kilpailuId != "0" %}
+<p><a href="/kilpailut/{{kilpailuId}}/sarja/0">Lisää uusi sarja</a></p>
+{% endif %}
+<ul>
+{% for i in range(sarjat|length) %}
+<li><a href="{{kilpailuId}}/sarja/{{sarjat[i].key.urlsafe()}}">{{sarjat[i].nimi}} (Kesto: {{sarjat[i].kesto}})</a></li>
+  <ul>
+  {% for j in range(joukkueet[i]|length) %}
+  <li><a href="{{kilpailuId}}/sarja/{{sarjat[i].key.urlsafe()}}/joukkue/{{joukkueet[i][j].key.urlsafe()}}">{{joukkueet[i][j].nimi}}</a></li>
+    <ul>
+    {% for k in range(joukkueet[i][j].jasenet|length) %}
+    <li>{{joukkueet[i][j].jasenet[k]}}</li>
+    {%endfor%}
+    </ul>
+  {%endfor%}
+  </ul>
+{%endfor%}
+</ul>
+<h2>Rastit</h2>
+{% if kilpailuId != "0" %}
+<p><a href="/kilpailut/{{kilpailuId}}/rasti/0">Lisää uusi rasti</a></p>
+{% endif %}
+<ul>
+{% for i in range(rastit|length) %}
+<li><a href="{{kilpailuId}}/rasti/{{rastit[i].key.urlsafe()}}">{{rastit[i].koodi}}</a></li>
+{%endfor%}
+</ul>
+  </body>
+</html>

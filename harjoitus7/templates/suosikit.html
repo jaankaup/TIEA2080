@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="UTF-8"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+  <link rel="StyleSheet" href="styles.css" type="text/css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  <script src="/static/myajax.js"></script>
+  <link rel="stylesheet" type="text/css" href="/static/tyylit.css">
+  <title>Suosikit</title>
+<style>
+label { display: block; }
+</style>
+  </head>
+  <body>
+    <p><a href="/login">logout</a></p>
+    <h1>Suosikit</h1>
+
+<p><a href="/syotteet">Takaisin pääsivulle</a></p>
+<ul class="uutis_ul">
+{% for i in range(uutiset|length) %}
+  <li class="uutis_palkki" id="uutinen{{i|string}}">
+  <button class="tuhoaNappi">Poista suosikeista</button>
+  <details>
+  <summary class="otsikko"><a class="linkki" href="{{uutiset[i].link}}">{{uutiset[i].title}}</a></summary>
+  <p class="kuvaus">{{uutiset[i].description|e}}</p>
+  </details>
+  </li>
+{%endfor%}
+</ul>
+  </body>
+</html>

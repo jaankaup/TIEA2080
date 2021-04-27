@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Kirjaudu sisään{% endblock %}
+{% block content %}
+
+
+<div id="loginTausta">
+<h1 id="kirjauduH1" >Kirjaudu sisään</h1>
+
+{% block formi %} 
+
+<form id="loginForm" action="{{request.base_url}}" accept-encoding="UTF-8" method="POST">
+<div id="kirjauduLabelit">
+<p>
+<label>Tunnus <input type="text" value="{{session['tempNimi']}}"
+                                      name="tunnus"/></label>
+<label class="error">{{variables['errorTunnus']}}</label>
+</p>
+<p>
+<label>Salasana <input type="password" name="salasana" /></label>
+<label class="error" > {{variables['errorSalasana']}} </label>
+</p>
+<p>
+<input id="loginButton" type="submit" name="laheta" value="Kirjaudu sisään" />
+</p>
+</div>
+<div id="kirjauduAlasveto">
+  <select name="alasveto">
+    {% for x in range(kilpailut|length) %}
+    {% if session['adminKilpailu'] != None and kilpailut[x] == session['adminKilpailu']['nimi'] %}
+    <option value="{{kilpailut[x]}}" selected >{{kilpailut[x]}}</option>
+    {% else %}
+    <option value="{{kilpailut[x]}}">{{kilpailut[x]}}</option>
+    {% endif %}
+    {% endfor %}
+  </select>
+</div>
+</form>
+{% endblock formi %}
+</div>
+
+
+{% endblock content %}

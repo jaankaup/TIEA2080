@@ -1,0 +1,36 @@
+body {
+    background-color: silver;
+    color: black;
+}
+
+.namiska {
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+  color: initial;
+  width: 50px;
+  height: 50px;
+}
+
+table {
+  border: 1px #eae4d1 solid;
+  box-shadow: 2px 3px 3px black;
+  padding: 0.3em;
+  border-spacing: 0.3em;
+  width: 35%;
+  background-color: white;
+}
+
+table tr {
+  margin: 0.3em;
+}
+
+table tr th {
+  background-color: #ffc653;
+  border: 1px #999999 solid;
+}
+
+table tr td {
+  border: 1px #999999 solid;
+}

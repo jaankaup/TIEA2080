@@ -1,0 +1,57 @@
+{% extends "withFooter.html" %}
+{% block title %}Muokka tupaa{% endblock %}
+
+<h1>Muokkaa tupaa</h1>
+
+{% block formi %}
+
+<form id="tupaForm" action="{{request.base_url}}" accept-charset="UTF-8" method="POST">
+  <div id="tupaMuokkaus">
+    <div>
+      <p id="tupaAikaLabel">
+      <label>Aika<input type="text" name="aika"
+                                    value="{{aika}}"/></label>
+      </p>
+      <p>
+      <label class="error"> {{ errorAika }} </label>
+      </p>
+    </div>
+    <div>
+      <p>Koodi
+      <select name="sKoodi">
+        {% for x in range(rastit|length) %}
+        {% if rastit[x]['koodi'] == koodi %}
+        <option selected value="{{rastit[x]['koodi']}}">{{rastit[x]['koodi']}}</option>
+        {% endif %}
+        <option value="{{rastit[x]['koodi']}}">{{rastit[x]['koodi']}}</option>
+        {% endfor %}
+      </select>
+      </p>
+      <p></p>
+    </div>
+    <div>
+      <p><label>Joukkue<input type="text" name="jNimi" readonly value="{{jNimi}}"/></label></p>
+      <p></p>
+    </div>
+    <div>
+      <p id="poistaTupaCheckbox">
+      {% if session['muokkaaTupaPoista'] is none %}
+      <label>Poista<input type="checkbox" name="poistaTupa"/></label>
+      {% else %}
+      <label>Poista<input type="checkbox" checked="checked" name="poistaTupa"/></label>
+      {% endif %}
+      </p>
+      <p>
+      <label class="error"> {{ errorPoista }} </label>
+      </p>
+    </div>
+  </div>
+  <p>
+  <input type="submit" name="laheta" value="Tallenna" />
+  {#  <input type="submit" name="uusiTupa" value="Uusi tupa" /> #}
+  <input type="hidden" name="alkuperainenJoukkue"
+                       value="{{alkuperainenJoukkue}}">
+  </p>
+</form>
+
+{% endblock formi %}

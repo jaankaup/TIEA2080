@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<div id="content" xmlns="http://www.w3.org/1999/xhtml">
+<h1>Muokkaa kisaa ({{session['adminKilpailu']['nimi']}})</h1>
+<ul>
+{% for x in range(sarjat|length) %}
+<li ><a class="sarjaLi" href="">{{sarjat[x]['nimi']}}</a></li>
+{% endfor %}
+</ul>
+<form action="{{request.base_url}}" accept-encoding="UTF-8" method="POST" id="muokkaaKisaForm">
+<div id="sarjaLisays">
+<p id="sarjanNimiLabel">
+<label>Sarjan nimi<input type="text" name="sarjanNimi" value="{{session['muokkaaSarjaSyote']}}"/></label>
+</p>
+<p id="poistaSarjaCheckbox">
+{% if session['muokkaaSarjaPoista'] is none %}
+<label>Poista<input type="checkbox" name="poistaSarja"/>
+{% else %}
+<label>Poista<input type="checkbox" checked="checked" name="poistaSarja"/>
+{% endif %}
+</label>
+</p>
+</div>
+<label class="error"> {{ errorSarja }} </label>
+<p>
+<input id="tallennaSarja" type="submit" name="laheta" value="Tallenna" />
+<input type="hidden" name="kisaNimiHidden" value="{{session['adminKilpailu']['nimi']}}"/>
+</p>
+<p id="pRastilistaus2">Rastilistaus</p>
+</form>
+</div>

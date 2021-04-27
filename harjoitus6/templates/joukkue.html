@@ -1,0 +1,47 @@
+<html>
+  <head>
+    <title>Joukkue</title>
+   <link rel="stylesheet" type="text/css" href="/static/tyylit.css">
+<style>
+label { display: block; }
+</style>
+  </head>
+  <body>
+    <p><a href="/login">logout</a></p>
+    <h1>Joukkue</h1>
+
+{% macro with_errors(field) %}
+    {% if field.errors %}
+        {% for error in field.errors %}
+            <span>{{ error|e }}</span>
+        {% endfor %}
+    {% endif %}
+{% endmacro %}
+
+<p><a href="/kilpailut/{{kilpailuId}}">Takaisin kilpailuun</a></p>
+<form action="" accept-charset="UTF-8" method="POST">
+  {{ form.csrf_token }}
+{{form.key}}
+<label>Nimi {{form.nimi}} {{with_errors(form.nimi)}}</label>
+<label>Sarja {{form.sarja}} {{with_errors(form.sarja)}}</label>
+{% for i in range(5) %}
+<label>Jäsen{{i+1}} {{form["jasen"+i|string]}} {{with_errors(form["jasen"+i|string])}}</label>
+{% endfor %}
+{% if joukkue_id != "0" %}
+<label>Poista joukkue <input type="checkbox" name="poista" value="poista" /></label>
+{% endif %}
+<p><input type="submit" name="lomake" value="Tallenna joukkue" /></p>
+</form>
+<h2>Rastileimaukset</h2>
+{% if joukkue_id != "0" %}
+<p><a href="/kilpailut/{{kilpailuId}}/sarja/{{sarja_id}}/joukkue/{{joukkue_id}}/rastileimaus/-1">Lisää uusi rastileimaus</a></p>
+{% endif %}
+  <table>
+  <tr><th>Aika</th><th>Koodi</th></tr>
+  {% for r in range(joukkue.rastileimaukset|length) %}
+  <tr><td><a
+      href="/kilpailut/{{kilpailuId}}/sarja/{{sarja_id}}/joukkue/{{joukkue_id}}/rastileimaus/{{r}}">{{joukkue.rastileimaukset[r].aika}}</a></td><td>{{rastit[r].koodi}}</tr>
+  {%endfor%}
+  </table>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="UTF-8"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+  <link rel="StyleSheet" href="styles.css" type="text/css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  <script src="/static/myajax.js"></script>
+  <link rel="stylesheet" type="text/css" href="/static/tyylit.css">
+  <title>Syöte</title>
+<style>
+label { display: block; }
+</style>
+  </head>
+  <body>
+    <p><a href="/login">logout</a></p>
+    <h1>Syöte {{form.nimi.value}}</h1>
+
+{% macro with_errors(field) %}
+    {% if field.errors %}
+        {% for error in field.errors %}
+            <span>{{ error|e }}</span>
+        {% endfor %}
+    {% endif %}
+{% endmacro %}
+
+<p><a href="/syotteet">Takaisin pääsivulle</a></p>
+<p><a href="/suosikit">Suosikit sivulle</a></p>
+<form action="{{syote_id}}" accept-charset="UTF-8" method="POST">
+  {{ form.csrf_token }}
+{{form.key}}
+<label id="nimi_label">Nimi {{form.nimi}} {{with_errors(form.nimi)}}</label>
+<label id="linkki_label">Linkki {{form.link}} {{with_errors(form.link)}}</label>
+{% if syote_id != "0" %}
+<label>Poista syöte <input type="checkbox" name="poista" value="poista" /></label>
+{% endif %}
+<p><input type="submit" name="lomake" value="Tallenna syöte" /></p>
+</form>
+<h2>Uutiset</h2>
+<button id="naytaSuosikit">Näytä tai piilosta suosikit</button>
+<ul class="uutis_ul">
+{% for i in range(uutiset|length) %}
+  <li class="uutis_palkki" id="uutinen{{i|string}}">
+    {% if us[i] %}
+      <button class="suosikki" >Poista suosikeista</button>
+    {% else %}
+      <button class="ei_suosikki">Lisää suosikkehin</button>
+    {% endif %}
+  <details>
+  <summary class="otsikko"><a class="linkki" href="{{uutiset[i].link}}">{{uutiset[i].title}}</a></summary>
+  <p class="kuvaus">{{uutiset[i].description|e}}</p>
+  </details>
+  </li>
+{%endfor%}
+</ul>
+  </body>
+</html>

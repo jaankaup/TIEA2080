@@ -1,0 +1,12 @@
+{% extends "withFooter.html" %}
+{% block title %}Kirjaudu ulos{% endblock %}
+{% block content %}
+
+<h1>Kirjaudu ulos</h1>
+<form action="{{request.base_url}}" accept-charset="UTF-8" method="POST">
+<p>
+<input type="submit" name="logoutButton" value="Logout"/>
+</p>
+</form>
+
+{% endblock %}

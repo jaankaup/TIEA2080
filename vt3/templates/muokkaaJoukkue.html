@@ -1,0 +1,90 @@
+{% extends "withFooter.html" %}
+{% block title %}Joukkueen muokkaus{% endblock %}
+{% block formi %}
+<h1>Joukkueen muokkaus</h1>
+<form id="muokkaaJoukkueForm" action="{{request.base_url}}" accept-charset="UTF-8" method="POST">
+<p id="joukkueenNimi">
+<label>Nimi<input type="text" name="joukkueNimi" size="25"
+  value="{{session['tempJNimi']}}"/></label>
+<label id="nimiError" class="error"> {{ joukkueNimiError }} </label>
+</p>
+<p>
+<div id="sarjat">
+  <div id="sarjaText">Sarja</div>
+  <div id="sarjaBoxit">
+    {% for x in range(sarjat|length) %}  
+    <p>
+    {% set tempSarjaNimi = sarjat[x]['nimi'] %}
+    {% set tempId = ''.join(sarjat[x]['nimi'].split()) %} 
+    <label for="{{tempId}}">{{tempSarjaNimi}}
+      </label>
+      {% if session['nykyinenSarja'] == tempSarjaNimi %}
+      <input id="{{tempId}}" name="SARJA" size="2" checked="checked"
+                                             value="{{tempSarjaNimi}}" type="radio">
+      {% else %}
+      <input id="{{tempId}}" name="SARJA" size="2" value="{{tempSarjaNimi}}" type="radio">
+      {% endif %}
+    </p>   
+    {% endfor %} 
+  </div>
+</div>
+<div id="jasenet">
+  <div id="jasenetText">
+    <label>Jäsenet</label><br>
+    <label class="error">{{jasenError}} </label>
+  </div>
+  <div id="jasenetLabels">
+{% for x in range(session['tempJasenet']|length) %}
+  <p>
+    {% set j = "Jäsen" + (x+1)|string %} 
+    <label for="{{j}}">{{j}}</label>
+    <input id="{{j}}" name="{{j}}" size="25" value="{{session['tempJasenet'][x]}}" type="text">
+    {% if jasenError|length > 0 and x == 0 %}
+    {% endif %}
+  </p>
+{% endfor %}
+  </div>
+</div>
+{# {% if session['kirjautunut'] == "regular" %} #}
+{# <p id="salasana"> #}
+{# <label>Salasana<input type="password" name="newSalasana" size="25" #}
+  {#   value="" placeholder="Tähän uusi salasana."/></label> #}
+{# <label id="salasanaError" class="error"> {{ salasanaError }} </label> #}
+{# </p> #}
+{# {% endif %} #}
+<p>
+<input type="submit" name="tallenna" value="Tallenna"/>
+{% if session['kirjautunut'] == "admin" and kisaRastit|length > 0 %}
+<input type="submit" name="lisaaRasti" value="Lisää tupa"/>
+{% endif %}
+</p>
+{% if session['kirjautunut'] == 'admin' %}
+<p id="poistaJoukkueP">
+  <input id="poistaJoukkueButton" type="checkbox" name="poistaJoukkue" value="poistaJoukkue"/>
+  <label id="poistaJoukkueLabel">Poista joukkue</label>
+  <label class="error">{{poistoError}}</label>
+</p>
+{% endif %}
+</form>
+
+{% endblock formi %}
+
+{# Taalla on listaus joukkueen rastileimauksista #}
+
+{% block taulukko %}
+
+<table>
+ <tr><th>Aika</th><th>Rasti</th></tr>
+{% for x in range(rastit|length) %}
+<tr>
+  {% if session['kirjautunut'] == "admin" %}
+  <td><a href="{{rastit[x]['href']}}">{{rastit[x]['tAika']}}</a></td>
+  {% else %}
+  <td>{{rastit[x]['tAika']}}</td>
+  {% endif %}
+<td>{{rastit[x]['rKoodi']}}</td>
+</tr>
+{% endfor %}
+</table>
+
+{% endblock taulukko %}

@@ -1,0 +1,34 @@
+<html>
+  <head>
+    <title>Rasti</title>
+   <link rel="stylesheet" type="text/css" href="/static/tyylit.css">
+<style>
+label { display: block; }
+</style>
+  </head>
+  <body>
+    <p><a href="/login">logout</a></p>
+    <h1>Rasti</h1>
+
+{% macro with_errors(field) %}
+    {% if field.errors %}
+        {% for error in field.errors %}
+            <span>{{ error|e }}</span>
+        {% endfor %}
+    {% endif %}
+{% endmacro %}
+
+<p><a href="/kilpailut/{{kilpailuId}}">Takaisin kilpailuun</a></p>
+<form action="{{rasti_id}}" accept-charset="UTF-8" method="POST">
+  {{ form.csrf_token }}
+{{form.key}}
+<label>Koodi {{form.koodi}} {{with_errors(form.koodi)}}</label>
+<label>Lat {{form.lat}} {{with_errors(form.lat)}}</label>
+<label>Lon {{form.lon}} {{with_errors(form.lon)}}</label>
+{% if rasti_id != "0" %}
+<label>Poista rasti <input type="checkbox" name="poista" value="poista" /></label>
+{% endif %}
+<p><input type="submit" name="lomake" value="Tallenna rasti" /></p>
+</form>
+</body>
+</html>

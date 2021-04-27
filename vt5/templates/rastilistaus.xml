@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<div id="content" xmlns="http://www.w3.org/1999/xhtml">
+<div id="taulukko">
+<h1>Kisan {{session['adminKilpailu']['nimi']}} rastilistaus.</h1>
+<ul>
+<table>
+ <tr><th>Lon</th><th>Lat</th><th>Koodi</th><th>Leimauskerrat</th></tr>
+{% for x in range(session['rastit']|length) %}
+<tr>
+<td>{{session['rastit'][x]['lon']}}</td>
+<td>{{session['rastit'][x]['lat']}}</td>
+<td>{{session['rastit'][x]['koodi']}}</td>
+<td>{{session['rastit'][x]['lkm']}}</td>
+<td><a class="rastilistausMuokkaa" href="">Muokkaa</a></td>
+</tr>
+{% endfor %}
+</table>
+</ul>
+</div>
+<div id="formi">
+{% if session['rastiNow'] != None %}
+<p id="rastiP" >Muokataan olemassa olevaa rastia!</p>
+{% endif %}
+<form action="{{request.base_url}}" accept-encoding="UTF-8" method="POST">
+ <div id="rastinLisays">
+ <p id="lanLabel">
+ <label>Lat<input type="text" name="lanLabel" value="{{tempLat}}"/></label>
+ <label class="error">{{lanLabelError}}</label>
+ </p>
+ <p id="lonLabel">
+ <label>Lon<input type="text" name="lonLabel" value="{{tempLon}}"/></label>
+ <label class="error">{{lonLabelError}}</label>
+ </p>
+ <p id="koodiLabel">
+ <label>Koodi<input type="text" name="koodiLabel"
+                                value="{{tempKoodi}}"/></label>
+ <label class="error">{{koodiLabelError}}</label>
+ </p>
+ <p id="poistaRasti">
+ <label>Poista<input type="checkbox" name="poistaRasti"/>
+ <label class="error">{{poistaError}}</label>
+ </label>
+ </p>
+ </div>
+ <p>
+ <input id="tallennaRasti" type="submit" name="laheta" value="Tallenna" />
+ </p>
+</form> 
+</div>
+</div>

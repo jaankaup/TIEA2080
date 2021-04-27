@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+<meta charset="UTF-8"/>
+<link rel="Stylesheet" href="vt2css.cgi?foo={{x}}" type="text/css"/>
+<title>Peli</title>
+</head>
+<body>
+
+<h1>Peli</h1>
+
+<p>Kerro luotavan pelialueen koko. Ruudukko on yhtä monta ruutua
+leveä kuin korkea. </p>
+
+<form action="vt2.cgi" method="post" accept-charset="UTF-8">
+  <fieldset>
+    <p><label>Koko <input type="text" name="x" /></label><label
+      id="errorText">{{ virheIlmoitus }}</label></p>
+    <p><label>Teksti <input type="text" name="teksti" /></label></p>
+    <p><input type="submit" value="Luo" /></p>
+  </fieldset>
+</form>
+<!-- Jos on virheilmoitus, niin ei tulosteta lautaa. -->
+{% if virheIlmoitus|length != 0 %}
+</body>
+</html>
+<!-- Tulostetaan lauta. -->
+{% else %}
+<div id="buttonit">
+  {% set poista = "poista" %}
+  {% if tila == poista %}
+  <p><a href="{{ siirraHref }}">Siirtotila</a></p>
+  <p><a href="{{ poistaHref }}" class="valittuTila">Poistotila</a></p>
+  {% else %}
+  <p><a class="valittuTila" href="{{ siirraHref }}">Siirtotila</a></p>
+  <p><a href="{{ poistaHref }}">Poistotila</a></p>
+  {% endif %}
+</div>
+
+<!-- tähän tulee ruudukko -->
+<div id="ruudukko">
+  <table>
+    {% for u in range(x) %}
+    <tr>
+      {% for y in range(x) %}
+      <td>
+        {% set i = u+y+(x-1)*u %}
+        {% set hr = taulukko[i][0] %}
+        {% if taulukko[i][1] == b %}
+        <a href="{{ hr }}"><img src="blue.svg" alt=""/></a>
+        {% elif taulukko[i][1] == r %}
+        <a href="{{ hr }}"><img src="red.svg" alt=""/></a>
+        {% elif taulukko[i][1] == gr or taulukko[i][1] == gb%}
+        <a href="{{ hr }}"><img src="green.svg" alt=""/></a>
+        {% else %}
+        <a href="{{ hr }}"><p class="emptyRuutu"></p></a>
+        {% endif %}
+      </td> 
+      {% endfor %}
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+<h2>{{teksti|e}}</h2>
+{% endif %}
+</body>
+</html>

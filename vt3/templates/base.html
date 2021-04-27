@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="fi">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" type="text/css"
+                         href={{url_for('static',filename='tyylit.css')}}> 
+   <title>{% block title %} {% endblock %}</title>
+</head>
+
+<body>
+  {% if 'kirjautunut' in session %}
+  <div id="footer">{% block footer %}{% endblock %}</div>
+  {% endif %}
+  <div id="content">
+    {% block content %}
+      <div id="listaus">{% block listaus %}{% endblock %}</div> 
+      <div id="formi">{% block formi %}{% endblock %}</div> 
+      <div id="taulukko">{% block taulukko %}{% endblock %}</div> 
+      <div id="alinElementti">{% block alinElementti %}{% endblock %}</div> 
+    {% endblock content %}
+  </div>
+</body>
+
+</html>

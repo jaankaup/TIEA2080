@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block footer %}
+    <footer>
+      <p>{{session['footerText']}}</p>
+      {% if session['kirjautunut'] == 'regular' %}
+      <p><a
+        href="{{url_for("muokkaaJoukkue")}}">{{session['joukkue']['nimi']}}</a></p>
+      <p><a href="{{url_for("joukkuelistaus")}}">Joukkuelistaus</a></p>
+      {% endif %}
+
+      {% if session['kirjautunut'] == 'admin' %}
+      <p><a
+        href="{{url_for("mainPage")}}">Pääsivu</a></p>
+      <p><a
+        href="{{session['adminKilpailu']['rastitUrl']}}">Rastilistaus</a></p>
+      {% endif %}
+
+      <p><a href="{{url_for("logoutPage")}}">Kirjaudu ulos</a></p>
+    </footer>
+{% endblock %}

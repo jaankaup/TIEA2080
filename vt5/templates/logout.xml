@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<div id="content" xmlns="http://www.w3.org/1999/xhtml">
+<h1>Kirjaudu ulos</h1>
+<form action="{{request.base_url}}" accept-encoding="UTF-8" method="POST">
+<p>
+<input id="logoutButton" type="submit" name="logoutButton" value="Logout"/>
+</p>
+</form>
+</div>

@@ -1,0 +1,327 @@
+body {
+  margin: 0.5em;
+  padding: 0.5em;
+  min-width: 300px;
+}
+
+.error {
+  color: red;
+  background-color: white;
+  font-weight: bold;
+}
+
+footer {
+  border: orange medium solid;
+  padding: 0.3em;
+  background-color: #207BBD;
+  background-clip: content-box;
+  color: white;
+}
+
+footer p {
+  margin-right: 0.5em;
+  margin-left: 0.5em;
+  display: inline-block;
+}
+
+footer p a {
+  color: white;
+}
+
+h1 {
+  margin-left: 0.0em;
+}
+
+#formi {
+  width: 30em;
+  padding-left:0.5em;
+}
+
+#content {
+  margin-top: 1em;
+  border: orange medium solid;
+  background-clip: content-box;
+  padding: 0.3em; 
+/*  background-color: #BDDEFF; */
+  background-color: white; 
+  
+  display: inline-block;
+}
+
+#footer p:last-child {
+  float: right;
+}
+
+/* Kirjaudu */
+
+#loginTausta {
+  height: 100%;
+  background-color: #BDDEFF;
+}
+
+#kirjauduH1 {
+/*  margin-left: 0.5em; */
+  text-align: center;
+  margin:0;
+  padding-bottom:0.5em;
+  padding-top:0.5em;
+}
+
+#kirjauduAlasveto {
+  padding: 1em;
+  background-color: #BDDEFF;
+}
+
+#loginForm {
+  background-color: #BDDEFF;
+  width: 35em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#kirjauduLabelit {
+  display: inline-block;
+  background-color: white;
+  vertical-align: center;
+  width: 95%;
+  padding-bottom: 1.0em;
+  box-shadow: 3px 5px 5px grey;
+  margin-bottom: 2em;
+}
+
+#loginForm p {
+  width: 90%;
+  margin: 1em;
+}
+
+#loginForm p:last-child {
+  display: inline-block;
+}
+
+#loginForm p label:first-child {
+  display: inline-block;
+}
+
+#loginForm p label:last-child {
+  display: inline-block;
+  vertical-align: bottom;
+  background-color: transparent;
+  margin-left: 1.0em;
+}
+
+#loginButton {
+  color: white;
+  background-color: #3194DE;
+  width: 8em;
+  height: 2em;
+  font-size: 1.0em;
+}
+
+#loginForm p label:first-child input {
+  display: block;
+}
+
+/* muokkaaJoukkue */
+
+#muokkaaJoukkueForm {
+  background-color: white;
+}
+
+#sarjat {
+  display: table;
+  table-layout: fixed;
+  width: 90%;
+  margin-right: 5em;
+}
+
+#sarjaText, #jasenetText {
+  display: table-cell;
+  width: 30%;
+  vertical-align: top;
+  padding-top: 0.0em;
+}
+
+#sarjaBoxit {
+  display: table-cell;
+  width: 70%;
+  float: right;
+}
+
+#sarjaBoxit p {
+  margin: 0;
+  display: table-row;
+  float: right;
+  clear: right;
+}
+
+#jasenet {
+  display: table;
+  table-layout: fixed;
+  width: 90%;
+  margin-right: 5em;
+}
+
+#jasenetLabels {
+  vertical-align: top;
+  display: table-cell;
+  vertical-align: top;
+}
+
+#jasenet p {
+  float:right;
+  margin: 0.2em;
+}
+
+#jasenet p label {
+  margin-top: 0em;
+  padding-right: 0.5em;
+}
+
+#jasenet p input {
+  float: right;
+}
+
+#joukkueenNimi, #salasana {
+  width: 90%;
+  display: table;
+}
+
+#joukkueenNimi label, #salasana label {
+  display: table-row;
+}
+
+#joukkueenNimi input, #salasana input {
+  float: right;
+  margin-left: 1.2em;
+}
+
+input[type=submit] {
+  width: 5em;
+  height: 1.5em;
+  font-size: 1.2em;
+  background-color: white;
+  color: #207BBD;
+  border: #3194DE solid thin;
+  border-radius: 0.2em;
+}
+
+#poistaJoukkueP {
+  
+}
+
+#poistaJoukkueButton, #poistaJoukkueLabel {
+  display: inline-block;
+}
+
+
+table {
+  border: 1px #eae4d1 solid;
+  box-shadow: 2px 3px 3px black;
+  padding: 0.3em;
+  border-spacing: 0.3em;
+  width: 95%;
+}
+
+table tr {
+  margin: 0.3em;
+}
+
+table tr th {
+  background-color: #ffc653;
+  border: 1px #999999 solid;
+}
+
+table tr td {
+  border: 1px #999999 solid;
+}
+
+#sarjaLisays {
+  display: table-row;
+}
+
+#sarjaLisays p {
+  display: table-cell;
+}
+
+#sarjaLisays p input {
+  margin-left: 0.5em;
+}
+
+#sarjaLisays p:last-child {
+  padding-left: 0.5em;
+}
+
+/* Sarjan muokkaus html */
+
+#sarjanNimiLabel input {
+  margin-left: 0.5em;
+}
+
+#rastiP {
+  animation-duration: 1s;
+  animation-name: vilku;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+@keyframes vilku {
+  from {
+    color: black;    
+  }
+  to {
+    color: red;    
+  }
+}
+
+
+#tupaForm div {
+  display:table;
+  border-spacing: 10px;
+  width: 100%;
+}
+#tupaForm div div{
+  display:table-row;
+}
+
+#tupaForm div div p:first-child {
+  display:table-cell;
+  width: 60%;
+}
+
+#tupaForm div div p:last-child {
+  display:table-cell;
+  width: 40%;
+}
+
+#tupaForm div div p input {
+  float: none;
+}
+
+#tupaForm div div p input, #tupaForm div div p select {
+  float: right;
+}
+
+
+/*
+#tupaForm div div, #tupaForm div p {
+  width: 50%;
+}
+
+#tupaForm div div p, #tupaForm div p {
+  width: 60%;
+}
+
+#tupaForm div div p:last-child {
+  width: 40%;
+}
+
+#tupaForm div p {
+  display: block;
+}
+
+#tupaForm div p input, #tupaForm div p select, #tupaForm div div p input {
+  float: right;
+}
+
+*/

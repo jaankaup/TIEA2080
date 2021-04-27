@@ -1,0 +1,86 @@
+body {
+}
+
+{{ '#' }}buttonit {
+  display: block;
+  margin-bottom: 1em;
+}
+
+{{ '#' }}buttonit p {
+  display: inline-block;
+  margin-left: 0.5em;
+  padding: 0.2em;
+}
+
+{{ '#' }}ruudukko {
+  border: #d69c52 medium solid; 
+  padding: 10px;
+  display: inline-block;
+}
+
+.valittuTila {
+  animation-duration: 1s;
+  animation-name: vilku;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+@keyframes vilku {
+  from {
+    background-color: white;
+  }
+
+  to {
+    background-color: orange;
+  }
+}
+
+{{ '#' }}errorText {
+  margin-left: 1.0em;
+  font-weight: bold;
+  color: red;
+}
+
+table {
+  border-collapse: collapse;
+  border: black thin solid; 
+}
+
+table tr {
+  margin: 0;
+  padding: 0;
+}
+
+table tr td {
+  width: calc( ( 100vw - 60px) / {{ foo }});
+  height: calc( ( 100vw - 60px) / {{ foo }});
+  
+  text-align: center;
+  vertical-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+table tr:nth-of-type(even) td:nth-of-type(odd) {
+  background-color: black;
+  color: white;
+}
+
+table tr:nth-of-type(odd) td:nth-of-type(even) {
+  background-color: black;
+  color: white;
+}
+
+img {
+  width: calc( ( 90vw - 60px) / {{ foo }});
+  height: calc( ( 90vw - 60px) / {{ foo }});
+  margin: 0;
+  padding: 0;
+}
+
+.emptyRuutu {
+
+  width: calc( ( 100vw - 60px) / {{ foo }});
+  height: calc( ( 100vw - 60px) / {{ foo }});
+  margin: 0;
+}

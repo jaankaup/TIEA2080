@@ -1,0 +1,30 @@
+<html>
+  <head>
+  <meta charset="UTF-8"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+  <link rel="StyleSheet" href="styles.css" type="text/css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  <script src="/static/myajax.js"></script>
+  <link rel="stylesheet" type="text/css" href="/static/tyylit.css">
+  <title>Syötteet</title>
+<style>
+label { display: block; }
+</style>
+  </head>
+  <body>
+    <p><a href="/login">logout</a></p>
+    <h1>Syötteet</h1>
+<p><a href="/syotteet/0">Lisää uusi syöte</a></p>
+<p><a href="/suosikit">Suosikit sivulle</a></p>
+<p><button id="toggleSyotteet">Näytä kaikki syötteet</button></p>
+<ul>
+{% for s in syotteet: %}
+<li class="omaSyote"><a href="syotteet/{{s.key.urlsafe()}}">{{s.nimi}}</a></li>
+{%endfor%}
+{% for s in allSyotteet: %}
+<li class="allSyote"><a href="syotteet/{{s.key.urlsafe()}}">{{s.nimi}}</a></li>
+{%endfor%}
+</ul>
+  </body>
+</html>

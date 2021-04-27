@@ -1,0 +1,38 @@
+{% extends "withFooter.html" %}
+{% block title %}Muokkaa kisaa{% endblock %}
+{% block content %}
+
+<h1>Muokkaa kisaa ({{session['adminKilpailu']['nimi']}})</h1>
+
+<ul>
+{% for x in range(sarjat|length) %}
+<li><a href="{{sarjat[x]['url']}}">{{sarjat[x]['nimi']}}</a></li>
+{% endfor %}
+</ul>
+
+
+<form action="{{request.base_url}}" accept-charset="UTF-8" method="POST">
+<div id="sarjaLisays">
+<p id="sarjanNimiLabel">
+<label>Sarjan nimi<input type="text" name="sarjanNimi"
+                                     value="{{session['muokkaaSarjaSyote']}}"/></label>
+</p>
+<p id="poistaSarjaCheckbox">
+{% if session['muokkaaSarjaPoista'] is none %}
+<label>Poista<input type="checkbox" name="poistaSarja"/>
+{% else %}
+<label>Poista<input type="checkbox" checked="checked" name="poistaSarja"/>
+{% endif %}
+</label>
+</p>
+</div>
+<label class="error"> {{ errorSarja }} </label>
+<p>
+<input type="submit" name="laheta" value="Tallenna" />
+</p>
+<p>
+<a href="{{session['adminKilpailu']['rastitUrl']}}">Rastilistaus</a>
+</p>
+</form>
+
+{% endblock content %}

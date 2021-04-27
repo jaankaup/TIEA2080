@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<div id="content" xmlns="http://www.w3.org/1999/xhtml">
+<h1>Joukkuelistaus</h1>
+
+{% for x in range(sarjat|length) %}
+<ul>
+  <li>{{sarjat[x]['sNimi']}}
+    <ul>
+    {% for y in range(sarjat[x]['sData']|length) %}
+    {% set joukkueNimi = sarjat[x]['sData'][y]['jNimi'] %}
+    <li>{{joukkueNimi}}
+        <ul>
+        {% for z in range(sarjat[x]['sData'][y]['jasenet']|length) %}
+        {% set jasen = sarjat[x]['sData'][y]['jasenet'][z] %}
+          <li>{{jasen}}</li>
+        {% endfor %}
+        </ul>
+      </li>
+    {% endfor %}
+    </ul>
+  </li>
+</ul>
+{% endfor %}
+</div>
+

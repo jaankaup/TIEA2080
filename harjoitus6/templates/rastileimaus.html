@@ -1,0 +1,33 @@
+<html>
+  <head>
+    <title>Rastileimaus</title>
+   <link rel="stylesheet" type="text/css" href="/static/tyylit.css">
+<style>
+label { display: block; }
+</style>
+  </head>
+  <body>
+    <p><a href="/login">logout</a></p>
+    <h1>Rastileimaus</h1>
+
+{% macro with_errors(field) %}
+    {% if field.errors %}
+        {% for error in field.errors %}
+            <span>{{ error|e }}</span>
+        {% endfor %}
+    {% endif %}
+{% endmacro %}
+
+<p><a href="/kilpailut/{{kilpailuId}}/sarja/{{sarja_id}}/joukkue/{{joukkue_id}}">Takaisin joukkueeseen</a></p>
+<form action="{{rasti_id}}" accept-charset="UTF-8" method="POST">
+  {{ form.csrf_token }}
+{{form.key}}
+<label>Aika {{form.aika}} {{with_errors(form.aika)}}</label>
+<label>Koodi {{form.rasti}} {{with_errors(form.rasti)}}</label>
+{% if rastileimaus_id != "-1" %}
+<label>Poista rastileimaus<input type="checkbox" name="poista" value="poista" /></label>
+{% endif %}
+<p><input type="submit" name="lomake" value="Tallenna rastileimaus" /></p>
+</form>
+</body>
+</html>
